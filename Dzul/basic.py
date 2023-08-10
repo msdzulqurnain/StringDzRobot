@@ -25,7 +25,7 @@ async def start(bot: Client, msg: Message):
 async def _help(bot: Client, msg: Message):
     await bot.send_message(
         msg.chat.id, ID.HELP_TEXT,
-        reply_markup=InlineKeyboardMarkup(BUTTON.BHOME)
+        reply_markup=InlineKeyboardMarkup(BUTTON.BACK)
     )
 
 
@@ -36,5 +36,5 @@ async def about(bot: Client, msg: Message):
         msg.chat.id,
         ID.ABOUT_TEXT,
         disable_web_page_preview=True,
-        reply_markup=InlineKeyboardMarkup(BUTTON.BHOME),
+        reply_markup=InlineKeyboardMarkup(BUTTON.BACK),
     )
