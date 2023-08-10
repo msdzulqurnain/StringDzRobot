@@ -43,7 +43,7 @@ Developer : [MS-DZULQURNAIN](https://t.me/MSDQQQ)
     OTP = "Silahkan Masukan Kode OTP Yang Dikirimkan Oleh Telegram Dengan Spasi Contoh `0 1 2 3 4` Ingat Pakai Spasi! "
     OTP_IN = "Kode OTP Yang Anda Masukan Tidak Cocok"
     FA = "Akun Anda Memiliki Sandi, Silahkan Masukan Sandi Anda Untuk Melanjutkan Membuat String"
-    FA_EXP = "Mohon Untuk Lebih Cepat Lagi"
+    EXP = "Mohon Untuk Lebih Cepat Lagi"
     FA_IN = "Sandi Yang Anda Masukan Tidak Cocok"
     CANC = "Pembuatan String Berhasil Dibatalkan"
     REST = "Pembuatan String Di Mulai Ulang"
