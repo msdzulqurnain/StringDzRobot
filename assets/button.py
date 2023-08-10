@@ -2,10 +2,10 @@ from pyrogram.types import InlineKeyboardButton
 
 
 class BUTTON:
-    BBUAT = [InlineKeyboardButton("🔥Start Generating Session🔥", callback_data="generate")]
+    BBUAT = [InlineKeyboardButton("🔥 BUAT STRING 🔥", callback_data="generate")]
 
     BACK = [
-        generate_single_button,
+        BBUAT,
         [InlineKeyboardButton(text="Kembali", callback_data="home")]
     ]
 
