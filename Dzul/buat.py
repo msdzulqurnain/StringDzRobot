@@ -88,7 +88,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
     try:
         phone_code_msg = None
         if not is_bot:
-            phone_code_msg = await bot.ask(user_id, text=OTP2, filters=filters.text, timeout=600)
+            phone_code_msg = await bot.ask(user_id, text=OTP, filters=filters.text, timeout=600)
             if await cancelled(phone_code_msg):
                 return
     except TimeoutError:
@@ -111,7 +111,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
             try:
                 two_step_msg = await bot.ask(user_id, text=FA, filters=filters.text, timeout=300)
             except TimeoutError:
-                await msg.reply(FA_EXP, reply_markup=InlineKeyboardMarkup(BUTTON.BBUAT))
+                await msg.reply(EXP, reply_markup=InlineKeyboardMarkup(BUTTON.BBUAT))
                 return
             try:
                 password = two_step_msg.text
