@@ -1,4 +1,5 @@
-from data import Data
+from assets.strings.id import ID
+from assets.button import BUTTON
 from pyrogram.types import Message
 from telethon import TelegramClient
 from pyrogram import Client, filters
