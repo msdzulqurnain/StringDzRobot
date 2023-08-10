@@ -1,8 +1,9 @@
 import traceback
-from data import Data
+from assets.strings.id import ID
+from assets.button import BUTTON
 from pyrogram import Client
 from pyrogram.types import CallbackQuery, InlineKeyboardMarkup
-from Dzul.buat import generate_session, ask_ques, buttons_ques
+from Dzul.buat import generate_session
 
 
 # Callbacks
@@ -19,8 +20,8 @@ async def _callbacks(bot: Client, callback_query: CallbackQuery):
             await bot.edit_message_text(
                 chat_id=chat_id,
                 message_id=message_id,
-                text=Data.START.format(callback_query.from_user.mention, mention),
-                reply_markup=InlineKeyboardMarkup(Data.buttons),
+                text=ID.START_TEXT.format(callback_query.from_user.mention, mention),
+                reply_markup=InlineKeyboardMarkup(BUTTON.BHOME),
             )
     elif query == "about":
         chat_id = callback_query.from_user.id
@@ -28,9 +29,9 @@ async def _callbacks(bot: Client, callback_query: CallbackQuery):
         await bot.edit_message_text(
             chat_id=chat_id,
             message_id=message_id,
-            text=Data.ABOUT,
+            text=ID.ABOUT_TEXT,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(Data.home_buttons),
+            reply_markup=InlineKeyboardMarkup(BUTTON.BHOME),
         )
     elif query == "help":
         chat_id = callback_query.from_user.id
@@ -38,23 +39,23 @@ async def _callbacks(bot: Client, callback_query: CallbackQuery):
         await bot.edit_message_text(
             chat_id=chat_id,
             message_id=message_id,
-            text=Data.HELP,
+            text=ID.HELP_TEXT,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(Data.home_buttons),
+            reply_markup=InlineKeyboardMarkup(BUTTON.BHOME),
         )
     elif query == "generate":
         await callback_query.answer()
-        await callback_query.message.reply(ask_ques, reply_markup=InlineKeyboardMarkup(buttons_ques))
+        await callback_query.message.reply(ID.BUAT_TEXT, reply_markup=InlineKeyboardMarkup(BUTTON.BBUAT))
     elif query.startswith("pyrogram") or query.startswith("telethon"):
         try:
             if query == "pyrogram":
-                await callback_query.answer("Please note that the new type of string sessions may not work in all bots, i.e, only the bots that have been updated to pyrogram v2 will work!\n\n@TmMainChannel", show_alert=True)
+                await callback_query.answer()
                 await generate_session(bot, callback_query.message)
             elif query == "pyrogram1":
                 await callback_query.answer()
                 await generate_session(bot, callback_query.message, old_pyro=True)
             elif query == "pyrogram_bot":
-                await callback_query.answer("Please note that this bot session will be of pyrogram v2\n\n@TmMainChannel", show_alert=True)
+                await callback_query.answer()
                 await generate_session(bot, callback_query.message, is_bot=True)
             elif query == "telethon_bot":
                 await callback_query.answer()
@@ -68,7 +69,4 @@ async def _callbacks(bot: Client, callback_query: CallbackQuery):
             await callback_query.message.reply(ERROR_MESSAGE.format(str(e)))
 
 
-ERROR_MESSAGE = "Oops! An exception occurred! \n\n**Error** : {} " \
-            "\n\nPlease visit @TechnoMindzChat if this message doesn't contain any " \
-            "sensitive information and you if want to report this as " \
-            "this error message is not being logged by us!"
+ERROR_MESSAGE = "Error coba lu tanya di @DezetSupport"
