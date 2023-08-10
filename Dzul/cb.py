@@ -31,7 +31,7 @@ async def _callbacks(bot: Client, callback_query: CallbackQuery):
             message_id=message_id,
             text=ID.ABOUT_TEXT,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(BUTTON.BHOME),
+            reply_markup=InlineKeyboardMarkup(BUTTON.BACK),
         )
     elif query == "help":
         chat_id = callback_query.from_user.id
@@ -41,7 +41,7 @@ async def _callbacks(bot: Client, callback_query: CallbackQuery):
             message_id=message_id,
             text=ID.HELP_TEXT,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(BUTTON.BHOME),
+            reply_markup=InlineKeyboardMarkup(BUTTON.BACK),
         )
     elif query == "generate":
         await callback_query.answer()
