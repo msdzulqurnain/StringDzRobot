@@ -83,7 +83,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
             else:
                 code = await client.send_code(phone_number)
     except (PhoneNumberInvalid, PhoneNumberInvalidError, PhoneNumberInvalid1):
-        await msg.reply(NOMOR_IN, reply_markup=InlineKeyboardMarkup(Data.generate_button))
+        await msg.reply(NOMOR_IN, reply_markup=InlineKeyboardMarkup(BUTTON.BBUAT))
         return
     try:
         phone_code_msg = None
@@ -92,7 +92,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
             if await cancelled(phone_code_msg):
                 return
     except TimeoutError:
-        await msg.reply(EXP, reply_markup=InlineKeyboardMarkup(Data.generate_button))
+        await msg.reply(EXP, reply_markup=InlineKeyboardMarkup(BUTTON.BBUAT))
         return
     if not is_bot:
         phone_code = phone_code_msg.text.replace(" ", "")
@@ -102,16 +102,16 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
             else:
                 await client.sign_in(phone_number, code.phone_code_hash, phone_code)
         except (PhoneCodeInvalid, PhoneCodeInvalidError, PhoneCodeInvalid1):
-            await msg.reply(OTP_IN, reply_markup=InlineKeyboardMarkup(Data.generate_button))
+            await msg.reply(OTP_IN, reply_markup=InlineKeyboardMarkup(BUTTON.BBUAT))
             return
         except (PhoneCodeExpired, PhoneCodeExpiredError, PhoneCodeExpired1):
-            await msg.reply(OTP_EXP, reply_markup=InlineKeyboardMarkup(Data.generate_button))
+            await msg.reply(OTP_EXP, reply_markup=InlineKeyboardMarkup(BUTTON.BBUAT))
             return
         except (SessionPasswordNeeded, SessionPasswordNeededError, SessionPasswordNeeded1):
             try:
                 two_step_msg = await bot.ask(user_id, text=FA, filters=filters.text, timeout=300)
             except TimeoutError:
-                await msg.reply(EXP, reply_markup=InlineKeyboardMarkup(Data.generate_button))
+                await msg.reply(FA_EXP, reply_markup=InlineKeyboardMarkup(BUTTON.BBUAT))
                 return
             try:
                 password = two_step_msg.text
@@ -122,7 +122,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
                 if await cancelled(api_id_msg):
                     return
             except (PasswordHashInvalid, PasswordHashInvalidError, PasswordHashInvalid1):
-                await two_step_msg.reply(FA_IN, quote=True, reply_markup=InlineKeyboardMarkup(Data.generate_button))
+                await two_step_msg.reply(FA_IN, quote=True, reply_markup=InlineKeyboardMarkup(BUTTON.BBUAT))
                 return
     else:
         if telethon:
@@ -142,15 +142,15 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
     except KeyError:
         pass
     await client.disconnect()
-    await bot.send_message(msg.chat.id, "Successfully generated {} string session. \n\nPlease check your saved messages! \n\nBy @DezetStringRobot\nSubscribe @DezetStore".format("telethon" if telethon else "pyrogram"))
+    await bot.send_message(msg.chat.id, "Berhasil membuat {} string session. \n\nSilakan Cek Pesan Tersimpan! \n\nBy @DezetStringRobot\nSubscribe @DezetStore".format("telethon" if telethon else "pyrogram"))
 
 
 async def cancelled(msg):
     if "/cancel" in msg.text:
-        await msg.reply(CANC, quote=True, reply_markup=InlineKeyboardMarkup(Data.generate_button))
+        await msg.reply(CANC, quote=True, reply_markup=InlineKeyboardMarkup(BUTTON.BBUAT))
         return True
     elif "/restart" in msg.text:
-        await msg.reply(REST, quote=True, reply_markup=InlineKeyboardMarkup(Data.generate_button))
+        await msg.reply(REST, quote=True, reply_markup=InlineKeyboardMarkup(BUTTON.BBUAT)
         return True
     elif msg.text.startswith("/"):  # Bot Commands
         await msg.reply(CANC, quote=True)
