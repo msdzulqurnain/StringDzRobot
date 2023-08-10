@@ -1,4 +1,5 @@
-from data import Data
+from assets.strings.id import ID
+from assets.button import BUTTON
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, Message
 
@@ -14,8 +15,8 @@ async def start(bot: Client, msg: Message):
     mention = user.mention
     await bot.send_message(
         msg.chat.id,
-        Data.START.format(msg.from_user.mention, mention),
-        reply_markup=InlineKeyboardMarkup(Data.buttons)
+        ID.START_TEXT.format(msg.from_user.mention, mention),
+        reply_markup=InlineKeyboardMarkup(BUTTON.BHOME)
     )
 
 
@@ -23,8 +24,8 @@ async def start(bot: Client, msg: Message):
 @Client.on_message(filter("help"))
 async def _help(bot: Client, msg: Message):
     await bot.send_message(
-        msg.chat.id, Data.HELP,
-        reply_markup=InlineKeyboardMarkup(Data.home_buttons)
+        msg.chat.id, ID.HELP_TEXT,
+        reply_markup=InlineKeyboardMarkup(BUTTON.BHOME)
     )
 
 
@@ -33,7 +34,7 @@ async def _help(bot: Client, msg: Message):
 async def about(bot: Client, msg: Message):
     await bot.send_message(
         msg.chat.id,
-        Data.ABOUT,
+        ID.ABOUT_TEXT,
         disable_web_page_preview=True,
-        reply_markup=InlineKeyboardMarkup(Data.home_buttons),
+        reply_markup=InlineKeyboardMarkup(BUTTON.BHOME),
     )
